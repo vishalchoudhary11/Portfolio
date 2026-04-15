@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vishal Choudhary – Business & Data Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0c;
+      --surface: #111115;
+      --card: #16161c;
+      --border: #2a2a35;
+      --accent: #e8c547;
+      --accent2: #4fd1c5;
+      --text: #e8e8f0;
+      --muted: #7a7a90;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 5vw;
+      background: rgba(10,10,12,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 5vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -100px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,197,71,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 10%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(79,209,197,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { max-width: 780px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(232,197,71,0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #0a0a0c;
+      padding: 0.8rem 2rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,197,71,0.25); }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.8rem 2rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--white);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.2rem; }
+
+    /* SECTIONS */
+    section { padding: 6rem 5vw; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 500px; margin-bottom: 3rem; }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 1rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .badge {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      font-weight: 500;
+    }
+    .badge-yellow { background: rgba(232,197,71,0.12); color: var(--accent); border: 1px solid rgba(232,197,71,0.2); }
+    .badge-teal { background: rgba(79,209,197,0.1); color: var(--accent2); border: 1px solid rgba(79,209,197,0.2); }
+    .badge-gray { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    .relocation-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .relocation-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .relocation-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .relocation-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.2rem; }
+    .reloc-items { list-style: none; }
+    .reloc-items li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .reloc-items li:last-child { border-bottom: none; }
+    .reloc-items li::before { content: '→'; color: var(--accent); font-size: 0.8rem; }
+
+    /* SKILLS */
+    #skills { background: var(--bg); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: rgba(232,197,71,0.3); transform: translateY(-3px); }
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .skill-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .skill-list { list-style: none; }
+    .skill-list li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-list li::before { content: '·'; color: var(--accent); font-size: 1.2rem; line-height: 0; }
+
+    /* EXPERIENCE */
+    #experience { background: var(--surface); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--border), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 1.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute; left: -2.4rem; top: 0.4rem;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(232,197,71,0.5);
+    }
+    .timeline-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .timeline-company {
+      font-size: 0.75rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.6rem;
+      border-radius: 2px;
+    }
+    .timeline-item h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .timeline-item p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .timeline-item ul { list-style: none; margin-top: 0.8rem; }
+    .timeline-item ul li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding: 0.3rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .timeline-item ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent2);
+      font-size: 0.75rem;
+    }
+
+    /* PROJECTS */
+    #projects { background: var(--bg); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .project-card:hover { border-color: rgba(232,197,71,0.25); transform: translateY(-3px); }
+    .project-card:hover::after { opacity: 1; }
+    .project-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+    }
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    .project-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; }
+    .project-tools {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    .tool-tag {
+      font-size: 0.7rem;
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--surface);
+      text-align: center;
+    }
+    .contact-inner { max-width: 560px; margin: 0 auto; }
+    .contact-inner .section-title { margin-bottom: 1rem; }
+    .contact-inner p { color: var(--muted); margin-bottom: 2.5rem; }
+    .contact-links {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.4rem;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-email {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.2rem;
+      transition: color 0.2s;
+    }
+    .contact-email:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+    .footer-right { font-size: 0.78rem; color: var(--muted); }
+    .footer-right span { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">VC.</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="hero-tag">Open to Opportunities · Germany</div>
+      <h1>Vishal<br><span>Choudhary</span></h1>
+      <p class="hero-sub">
+        <strong>Business & Data Analyst</strong> with 4+ years turning raw data into decisions.
+        Based in India — ready to relocate to Germany. EU Blue Card eligible.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+        <a href="#experience" class="btn-ghost">View Experience</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">4<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Industries Served</div>
+        </div>
+        <div>
+          <div class="stat-num">DE</div>
+          <div class="stat-label">Target Market</div>
+        </div>
+        <div>
+          <div class="stat-num">30<span>d</span></div>
+          <div class="stat-label">Notice Period</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Data that drives<br>real decisions.</h2>
+        <p>
+          I'm a Business and Data Analyst based in <strong>Navi Mumbai, India</strong>, with over 4 years of experience
+          working across retail, FMCG, and supply chain domains. My core strength is translating
+          complex data into clear, actionable insights for stakeholders.
+        </p>
+        <p>
+          At PreciTaste, I supported <strong>REWE Germany</strong>'s operations — giving me
+          direct exposure to the German retail market and the working culture I'm now actively
+          targeting for my next role.
+        </p>
+        <p>
+          I'm <strong>EU Blue Card eligible</strong> and fully committed to relocating to Germany.
+          I bring domain knowledge of the German market, a collaborative work style, and the
+          analytical toolkit modern data teams need.
+        </p>
+        <div class="about-badges">
+          <span class="badge badge-yellow">Power BI</span>
+          <span class="badge badge-yellow">SQL</span>
+          <span class="badge badge-yellow">Advanced Excel</span>
+          <span class="badge badge-teal">REWE Germany</span>
+          <span class="badge badge-teal">FMCG</span>
+          <span class="badge badge-teal">Supply Chain</span>
+          <span class="badge badge-gray">ETL</span>
+          <span class="badge badge-gray">DAX</span>
+          <span class="badge badge-gray">KPI Reporting</span>
+        </div>
+      </div>
+      <div class="relocation-card">
+        <h3>🇩🇪 Ready to Relocate to Germany</h3>
+        <p>Targeting senior analytics roles at tech and e-commerce companies across Germany.</p>
+        <ul class="reloc-items">
+          <li>EU Blue Card eligible (salary threshold met)</li>
+          <li>30-day notice period · Available from May 2026</li>
+          <li>Preferred cities: Berlin, Munich, Frankfurt, Hamburg</li>
+          <li>Secondary interest: Netherlands, Austria, Sweden</li>
+          <li>German: A1 (actively learning)</li>
+          <li>English: Fluent (professional)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="fade-in">
+      <div class="section-label">What I Work With</div>
+      <h2 class="section-title">Skills & Tools</h2>
+      <p class="section-sub">A focused toolkit built over 4+ years of hands-on analytical work.</p>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3>Data Visualization</h3>
+        <ul class="skill-list">
+          <li>Power BI (DAX, Data Modeling)</li>
+          <li>Power Query / M Language</li>
+          <li>Interactive Dashboards</li>
+          <li>Executive Reporting</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h3>Data & SQL</h3>
+        <ul class="skill-list">
+          <li>SQL (queries, joins, aggregation)</li>
+          <li>ETL Processes</li>
+          <li>Data Cleaning & Transformation</li>
+          <li>Database Management</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <h3>Excel & Analysis</h3>
+        <ul class="skill-list">
+          <li>Advanced Excel (Pivot, VLOOKUP)</li>
+          <li>KPI Design & Tracking</li>
+          <li>Financial Modelling</li>
+          <li>Forecasting & Trend Analysis</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🏭</div>
+        <h3>Domain Expertise</h3>
+        <ul class="skill-list">
+          <li>Retail & FMCG Analytics</li>
+          <li>Supply Chain Operations</li>
+          <li>German Market (REWE)</li>
+          <li>Stakeholder Communication</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="fade-in">
+      <div class="section-label">Career</div>
+      <h2 class="section-title">Work Experience</h2>
+      <p class="section-sub">Building expertise across retail and supply chain analytics.</p>
+    </div>
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">May 2025 – Present</span>
+          <span class="timeline-company">Flemingo Corporate Services</span>
+        </div>
+        <h3>Data / Business Analyst</h3>
+        <p>Supporting corporate analytics operations, building reporting frameworks, and delivering data-driven insights to cross-functional teams.</p>
+        <ul>
+          <li>Building Power BI dashboards for business performance tracking</li>
+          <li>SQL-based data extraction and ETL pipeline support</li>
+          <li>KPI reporting for senior stakeholders</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">Nov 2021 – Apr 2025</span>
+          <span class="timeline-company">Interproductec Virtual Labs · PreciTaste</span>
+        </div>
+        <h3>Business / Data Analyst</h3>
+        <p>Supported REWE Germany's retail operations remotely from India — delivering analytics, dashboards, and operational insights for the German FMCG market.</p>
+        <ul>
+          <li>Delivered Power BI reports for REWE Germany's supply chain operations</li>
+          <li>Developed KPI frameworks tracking retail performance metrics</li>
+          <li>ETL process management and data pipeline maintenance</li>
+          <li>Cross-functional collaboration with German stakeholders</li>
+          <li>Advanced Excel modelling for forecasting and operational planning</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="fade-in">
+      <div class="section-label">Work Samples</div>
+      <h2 class="section-title">Key Projects</h2>
+      <p class="section-sub">Selected analytical work demonstrating real-world impact.</p>
+    </div>
+    <div class="projects-grid fade-in">
+      <div class="project-card">
+        <div class="project-tag">Power BI · Retail</div>
+        <h3>REWE Germany Supply Chain Dashboard</h3>
+        <p>Built an end-to-end Power BI dashboard tracking supply chain KPIs for REWE Germany's operations — covering stock levels, delivery performance, and supplier metrics.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Power BI</span>
+          <span class="tool-tag">DAX</span>
+          <span class="tool-tag">SQL</span>
+          <span class="tool-tag">Power Query</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">SQL · ETL</div>
+        <h3>Retail Performance ETL Pipeline</h3>
+        <p>Designed and maintained ETL processes for ingesting retail sales data from multiple sources into a unified reporting layer, enabling consistent KPI tracking.</p>
+        <div class="project-tools">
+          <span class="tool-tag">SQL</span>
+          <span class="tool-tag">ETL</span>
+          <span class="tool-tag">Excel</span>
+          <span class="tool-tag">Data Modeling</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-tag">Excel · Forecasting</div>
+        <h3>FMCG Demand Forecasting Model</h3>
+        <p>Built an advanced Excel model for demand forecasting in FMCG retail, reducing planning errors and improving inventory decision accuracy for stakeholders.</p>
+        <div class="project-tools">
+          <span class="tool-tag">Advanced Excel</span>
+          <span class="tool-tag">Pivot Tables</span>
+          <span class="tool-tag">Forecasting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner fade-in">
+      <div class="section-label">Let's Talk</div>
+      <h2 class="section-title">Open to Opportunities<br>in Germany</h2>
+      <p>If you're hiring for a Business Analyst or Data Analyst role in Germany, I'd love to connect. EU Blue Card eligible. Available from May 2026.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/vishalchoudhary" class="contact-link" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/vishalchoudhary" class="contact-link" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:vishal@email.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+          Email
+        </a>
+      </div>
+      <a href="mailto:vishal@email.com" class="contact-email">vishal@email.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Vishal Choudhary. All rights reserved.</p>
+    <p class="footer-right">Built with HTML · Hosted on <span>GitHub Pages</span></p>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
